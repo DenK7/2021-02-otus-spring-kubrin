@@ -12,6 +12,6 @@ public class CSVWorkImplTest {
     @DisplayName("должен выдавать ошибку если файл не приходит")
     void testErrLoad () {
         CSVWorkImpl csvWorkImpl = new CSVWorkImpl();
-        Assertions.assertThrows(NullPointerException.class, () -> csvWorkImpl.getCSVRows(null));
+        Assertions.assertThrows(NullPointerException.class, () -> csvWorkImpl.getCSVRows());
     }
 }

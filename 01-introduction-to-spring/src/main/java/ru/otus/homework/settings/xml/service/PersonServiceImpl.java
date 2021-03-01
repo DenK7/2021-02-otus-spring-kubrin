@@ -1,12 +1,11 @@
 package ru.otus.homework.settings.xml.service;
 
-import ru.otus.homework.settings.xml.cvs.CVSRow;
 import ru.otus.homework.settings.xml.dao.PersonDAO;
 import ru.otus.homework.settings.xml.dao.PersonTestDAO;
 import ru.otus.homework.settings.xml.domain.Person;
 import ru.otus.homework.settings.xml.domain.PersonTest;
 
-import java.util.List;
+import java.io.IOException;
 
 public class PersonServiceImpl implements PersonService{
     private final PersonDAO personDAO;
@@ -18,8 +17,8 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public Person getPersonByName(String lastName, String firstName, List<CVSRow> cvsRows) {
-        PersonTest personTest = personTestDAO.getPersonTest(cvsRows);
+    public Person getPersonByName(String lastName, String firstName) throws IOException {
+        PersonTest personTest = personTestDAO.getPersonTest();
         return personDAO.getPersonByName(lastName, firstName, personTest);
     }
 

@@ -9,7 +9,9 @@
     </bean>
 
     <bean id="personDAO" class="ru.otus.homework.settings.xml.dao.PersonDAOImpl"/>
-    <bean id="personTestDAO" class="ru.otus.homework.settings.xml.dao.PersonTestDAOImpl"/>
+    <bean id="personTestDAO" class="ru.otus.homework.settings.xml.dao.PersonTestDAOImpl">
+        <constructor-arg name="workCSV" ref="csv"/>
+    </bean>
 
     <bean id="personService" class="ru.otus.homework.settings.xml.service.PersonServiceImpl">
         <constructor-arg name="personDAO" ref="personDAO"/>

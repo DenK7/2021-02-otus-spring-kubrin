@@ -8,18 +8,18 @@ import java.io.IOException;
 import java.util.List;
 
 public class CSVWorkImpl implements CSVWork{
-    private String fileName;
+    private File file;
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setFileName(File file) {
+        this.file = file;
     }
 
-    public String getFileName() {
-        return fileName;
+    public File getFileName() {
+        return file;
     }
 
     @Override
-    public List<CVSRow> getCSVRows(File file) throws IOException {
+    public List<CVSRow> getCSVRows() throws IOException {
         if (file == null) {
             throw new NullPointerException("File is null");
         }

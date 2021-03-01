@@ -1,17 +1,26 @@
 package ru.otus.homework.settings.xml.dao;
 
+import ru.otus.homework.settings.xml.cvs.CSVWork;
 import ru.otus.homework.settings.xml.cvs.CVSRow;
 import ru.otus.homework.settings.xml.domain.Answer;
 import ru.otus.homework.settings.xml.domain.PersonTest;
 import ru.otus.homework.settings.xml.domain.Question;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersonTestDAOImpl implements PersonTestDAO{
+    private final CSVWork csvWork;
+
+    public PersonTestDAOImpl(CSVWork workCSV) {
+        this.csvWork = workCSV;
+    }
 
     @Override
-    public PersonTest getPersonTest(List<CVSRow> rows) {
+    public PersonTest getPersonTest() throws IOException {
+        List<CVSRow> rows = csvWork.getCSVRows();
+
         if (rows == null || rows.size() == 0) {
             return null;
         }

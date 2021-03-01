@@ -1,13 +1,12 @@
 package ru.otus.homework.settings.xml.dao;
 
-import ru.otus.homework.settings.xml.cvs.CVSRow;
 import ru.otus.homework.settings.xml.domain.PersonTest;
 
-import java.util.List;
+import java.io.IOException;
 
 public interface PersonTestDAO {
 
-    PersonTest getPersonTest(List<CVSRow> rows);
+    PersonTest getPersonTest() throws IOException;
 
     void printTest(PersonTest personTest);
 }
