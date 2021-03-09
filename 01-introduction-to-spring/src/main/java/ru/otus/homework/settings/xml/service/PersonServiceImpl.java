@@ -1,26 +1,73 @@
 package ru.otus.homework.settings.xml.service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import ru.otus.homework.settings.xml.dao.PersonDAO;
 import ru.otus.homework.settings.xml.dao.PersonTestDAO;
+import ru.otus.homework.settings.xml.domain.Answer;
 import ru.otus.homework.settings.xml.domain.Person;
 import ru.otus.homework.settings.xml.domain.PersonTest;
+import ru.otus.homework.settings.xml.domain.Question;
 
+import javax.crypto.spec.PSource;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
+@Service
 public class PersonServiceImpl implements PersonService{
     private final PersonDAO personDAO;
     private final PersonTestDAO personTestDAO;
 
-    public PersonServiceImpl(PersonDAO personDAO, PersonTestDAO personTestDAO) {
+    public PersonServiceImpl(@Qualifier("PersonDAO") PersonDAO personDAO
+            , @Qualifier("PersonTestDAO") PersonTestDAO personTestDAO) {
         this.personDAO = personDAO;
         this.personTestDAO = personTestDAO;
     }
 
     @Override
-    public Person getPersonByName(String lastName, String firstName) throws IOException {
+    public void startTest() throws IOException {
         PersonTest personTest = personTestDAO.getPersonTest();
-        return personDAO.getPersonByName(lastName, firstName, personTest);
+        Person person = personDAO.getPersonByName(personTest);
+        for (int i = 0; i < 5; i++) {
+            if (getTestQuestion(person.getTest().getQuestions().get(i))) {
+                person.getTest().setCorrectAnswers(person.getTest().getCorrectAnswers() + 1);
+            }
+        }
+        printResult(personTest);
     }
 
+    private boolean getTestQuestion(Question question) throws IOException {
+        System.out.println("Question :" + question.getQuestionText());
+        int i = 0;
+        for (Answer answer: question.getAnswers()) {
+            i++;
+            System.out.println(i + ") " + answer.getAnswerText());
+        }
+        System.out.println("Enter the number of the correct answer:");
+
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(System.in));
+        String answerNumber = reader.readLine();
+
+        try {
+            if ("+".equals(question.getAnswers().get(Integer.parseInt(answerNumber)-1).getIsCorrect())) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    };
+
+    private void printResult (PersonTest personTest) {
+        System.out.println("Number of correct answers: " + personTest.getCorrectAnswers());
+        if (personTest.getCorrectAnswers() >= personTest.getMinNumberCorrectAnswers()) {
+            System.out.println("Test passed");
+        } else {
+            System.out.println("Test failed");
+        }
+    }
 
 }

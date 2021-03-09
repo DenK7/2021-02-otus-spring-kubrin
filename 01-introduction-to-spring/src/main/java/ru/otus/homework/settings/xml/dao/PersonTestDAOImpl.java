@@ -1,5 +1,8 @@
 package ru.otus.homework.settings.xml.dao;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import ru.otus.homework.settings.xml.cvs.CSVWork;
 import ru.otus.homework.settings.xml.cvs.CVSRow;
 import ru.otus.homework.settings.xml.domain.Answer;
@@ -10,10 +13,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component("PersonTestDAO")
 public class PersonTestDAOImpl implements PersonTestDAO{
     private final CSVWork csvWork;
 
-    public PersonTestDAOImpl(CSVWork workCSV) {
+    @Value("${number.correct.answers}")
+    private Integer numberCorrectAnswers;
+
+    public PersonTestDAOImpl(@Qualifier("csvWork") CSVWork workCSV) {
         this.csvWork = workCSV;
     }
 
@@ -43,16 +50,6 @@ public class PersonTestDAOImpl implements PersonTestDAO{
             }
         }
 
-        return new PersonTest(questions);
-    }
-
-    @Override
-    public void printTest(PersonTest personTest) {
-        for (Question question: personTest.getQuestions()) {
-            System.out.println(question.getQuestionText());
-            for (Answer answer: question.getAnswers()) {
-                System.out.println(answer.getIsCorrect() + " " + answer.getAnswerText());
-            }
-        }
+        return new PersonTest(questions, numberCorrectAnswers, 0);
     }
 }

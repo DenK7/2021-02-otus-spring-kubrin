@@ -8,14 +8,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class CSVWorkImpl implements CSVWork{
-    private File file;
+    private final File file;
 
-    public void setFileName(File file) {
+    public CSVWorkImpl(File file) {
         this.file = file;
-    }
-
-    public File getFileName() {
-        return file;
     }
 
     @Override
