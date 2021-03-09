@@ -9,7 +9,6 @@ import ru.otus.homework.settings.xml.domain.Person;
 import ru.otus.homework.settings.xml.domain.PersonTest;
 import ru.otus.homework.settings.xml.domain.Question;
 
-import javax.crypto.spec.PSource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -59,7 +58,7 @@ public class PersonServiceImpl implements PersonService{
             return false;
         }
         return false;
-    };
+    }
 
     private void printResult (PersonTest personTest) {
         System.out.println("Number of correct answers: " + personTest.getCorrectAnswers());
