@@ -1,17 +1,13 @@
 package ru.otus.homework.settings.xml.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
-@AllArgsConstructor
-@Builder
 @ToString
 @Getter
+@Setter
 public class Person {
 
-    private final String lastName;
-    private final String firstName;
-    private final PersonTest test;
+    private String lastName;
+    private String firstName;
+    private PersonTest test;
 }

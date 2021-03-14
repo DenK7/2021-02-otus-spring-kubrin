@@ -13,6 +13,16 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public Person getPersonByName(PersonTest personTest) throws IOException {
+
+        Person person = getPersonName();
+        person.setTest(personTest);
+
+        return person;
+    }
+
+    public Person getPersonName() throws IOException {
+        Person person = new Person();
+
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in));
 
@@ -21,10 +31,9 @@ public class PersonDAOImpl implements PersonDAO {
         System.out.println("Enter last name: ");
         String firstName = reader.readLine();
 
-        return Person.builder()
-                .lastName(lastName)
-                .firstName(firstName)
-                .test(personTest)
-                .build();
+        person.setLastName(lastName);
+        person.setFirstName(firstName);
+
+        return person;
     }
 }
