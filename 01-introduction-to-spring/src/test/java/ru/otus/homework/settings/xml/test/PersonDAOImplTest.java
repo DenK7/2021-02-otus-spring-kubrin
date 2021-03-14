@@ -13,8 +13,6 @@ import ru.otus.homework.settings.xml.Application;
 import ru.otus.homework.settings.xml.dao.PersonDAOImpl;
 import ru.otus.homework.settings.xml.domain.Person;
 
-import java.io.IOException;
-
 @DisplayName("class - PersonDAOImplTest")
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = Application.class)
