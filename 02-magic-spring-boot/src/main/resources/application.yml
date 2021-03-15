@@ -1,0 +1,10 @@
+file:
+  name: "questions.csv"
+
+number:
+  correct:
+    answers: 4
+
+spring:
+  messages:
+    basename: "i18n/messages"
