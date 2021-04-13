@@ -10,5 +10,6 @@ import lombok.Getter;
 public class Answer {
 
     private final String isCorrect;
-    private final String answerText;
+    private final String answerTextRu;
+    private final String answerTextEn;
 }

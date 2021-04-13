@@ -1,22 +1,21 @@
 package ru.otus.homework.magic.spring.boot.dao;
 
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import ru.otus.homework.magic.spring.boot.domain.Person;
 import ru.otus.homework.magic.spring.boot.domain.PersonTest;
+import ru.otus.homework.magic.spring.boot.messages.Message;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Locale;
 
 @Component("PersonDAO")
 public class PersonDAOImpl implements PersonDAO {
 
-    private MessageSource messageSource;
+    private final Message message;
 
-    public PersonDAOImpl(MessageSource messageSource) {
-        this.messageSource = messageSource;
+    public PersonDAOImpl(Message message) {
+        this.message = message;
     }
 
     @Override
@@ -34,9 +33,9 @@ public class PersonDAOImpl implements PersonDAO {
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in));
 
-        System.out.println(messageSource.getMessage("ENTER.LAST.NAME", null, Locale.getDefault()) );
+        System.out.println(message.getMessage("ENTER.LAST.NAME") );
         String lastName = reader.readLine();
-        System.out.println(messageSource.getMessage("ENTER.FIRST.NAME", null, Locale.getDefault()));
+        System.out.println(message.getMessage("ENTER.FIRST.NAME"));
         String firstName = reader.readLine();
 
         person.setLastName(lastName);

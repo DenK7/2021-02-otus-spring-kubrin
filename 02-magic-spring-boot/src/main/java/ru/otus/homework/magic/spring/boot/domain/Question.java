@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 public class Question {
 
-    private final String questionText;
+    private final String questionTextRu;
+    private final String questionTextEn;
     private final List<Answer> answers;
 }
