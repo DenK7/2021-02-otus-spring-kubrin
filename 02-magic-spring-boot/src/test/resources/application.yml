@@ -1,0 +1,14 @@
+file:
+  name: "questions.csv"
+
+number:
+  correct:
+    answers: 4
+
+default:
+  parameter:
+    locale: ru
+
+spring:
+  messages:
+    basename: "i18n/messages"
