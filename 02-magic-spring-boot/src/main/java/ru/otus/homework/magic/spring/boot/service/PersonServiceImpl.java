@@ -14,7 +14,6 @@ import ru.otus.homework.magic.spring.boot.exception.PersonNotFound;
 import ru.otus.homework.magic.spring.boot.messages.MessageGenerate;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 @Service
