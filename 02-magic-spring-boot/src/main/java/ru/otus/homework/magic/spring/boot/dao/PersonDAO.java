@@ -6,5 +6,7 @@ import ru.otus.homework.magic.spring.boot.domain.PersonTest;
 import java.io.IOException;
 
 public interface PersonDAO {
-    Person getPersonByName (PersonTest personTest) throws IOException;
+    void getPersonWithQuestions(Person person, PersonTest personTest);
+
+    Person getPerson(String lastName, String firstName);
 }

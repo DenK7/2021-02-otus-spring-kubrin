@@ -3,7 +3,7 @@ package ru.otus.homework.magic.spring.boot.parser;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.stereotype.Component;
 import ru.otus.homework.magic.spring.boot.exception.ParsException;
-import ru.otus.homework.magic.spring.boot.messages.Message;
+import ru.otus.homework.magic.spring.boot.messages.MessageGenerate;
 
 import java.io.File;
 import java.io.FileReader;
@@ -13,16 +13,16 @@ import java.util.List;
 @Component
 public class ParserCSVImpl implements Parser {
 
-    private final Message message;
+    private final MessageGenerate messageGenerate;
 
-    public ParserCSVImpl(Message message) {
-        this.message = message;
+    public ParserCSVImpl(MessageGenerate messageGenerate) {
+        this.messageGenerate = messageGenerate;
     }
 
     @Override
-    public List<DataRow> getParsRows(File file) throws ParsException {
+    public List<DataRow> getParsRows(File file) {
         if (file == null) {
-            throw new NullPointerException(message.getMessage("FILE.NOT.FOUND"));
+            throw new NullPointerException(messageGenerate.getMessage("FILE.NOT.FOUND"));
         }
 
         try {

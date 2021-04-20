@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 
 @Component
-public class MessageImpl implements Message{
+public class MessageGenerateImpl implements MessageGenerate {
     private final MessageSource messageSource;
     private final String locale;
 
-    public MessageImpl(MessageSource messageSource, @Value("${default.parameter.locale}") String locale) {
+    public MessageGenerateImpl(MessageSource messageSource, @Value("${default.parameter.locale}") String locale) {
         this.messageSource = messageSource;
         this.locale = locale;
     }

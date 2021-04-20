@@ -1,10 +1,9 @@
 package ru.otus.homework.magic.spring.boot.service;
 
-import ru.otus.homework.magic.spring.boot.exception.LoadFileException;
-import ru.otus.homework.magic.spring.boot.exception.ParsException;
-
-import java.io.IOException;
+import ru.otus.homework.magic.spring.boot.domain.Person;
 
 public interface PersonService {
-    void startTest() throws IOException, LoadFileException, ParsException;
+    Person loadQuestionIntoPerson(String lastName, String firstName) ;
+
+    void startTest(Person person);
 }

@@ -1,5 +1,5 @@
 package ru.otus.homework.magic.spring.boot.exception;
 
-public class ParsException extends Exception {
+public class ParsException extends MainHomeworkException {
 
 }

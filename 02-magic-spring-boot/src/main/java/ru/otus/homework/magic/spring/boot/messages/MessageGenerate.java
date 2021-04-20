@@ -1,5 +1,5 @@
 package ru.otus.homework.magic.spring.boot.messages;
 
-public interface Message {
+public interface MessageGenerate {
     String getMessage(String messageName);
 }

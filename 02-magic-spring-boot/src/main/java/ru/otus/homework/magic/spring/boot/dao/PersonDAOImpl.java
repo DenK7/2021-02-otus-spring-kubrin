@@ -3,40 +3,29 @@ package ru.otus.homework.magic.spring.boot.dao;
 import org.springframework.stereotype.Component;
 import ru.otus.homework.magic.spring.boot.domain.Person;
 import ru.otus.homework.magic.spring.boot.domain.PersonTest;
-import ru.otus.homework.magic.spring.boot.messages.Message;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import ru.otus.homework.magic.spring.boot.exception.QuestionsNotFound;
+import ru.otus.homework.magic.spring.boot.messages.MessageGenerate;
 
 @Component("PersonDAO")
 public class PersonDAOImpl implements PersonDAO {
 
-    private final Message message;
+    private final MessageGenerate messageGenerate;
 
-    public PersonDAOImpl(Message message) {
-        this.message = message;
+    public PersonDAOImpl(MessageGenerate messageGenerate) {
+        this.messageGenerate = messageGenerate;
     }
 
     @Override
-    public Person getPersonByName(PersonTest personTest) throws IOException {
-
-        Person person = getPersonName();
+    public void getPersonWithQuestions(Person person, PersonTest personTest) {
+        if (personTest.getQuestions() == null || personTest.getQuestions().size() == 0) {
+            throw new QuestionsNotFound();
+        }
         person.setTest(personTest);
-
-        return person;
     }
 
-    public Person getPersonName() throws IOException {
+    @Override
+    public Person getPerson(String lastName, String firstName) {
         Person person = new Person();
-
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(System.in));
-
-        System.out.println(message.getMessage("ENTER.LAST.NAME") );
-        String lastName = reader.readLine();
-        System.out.println(message.getMessage("ENTER.FIRST.NAME"));
-        String firstName = reader.readLine();
 
         person.setLastName(lastName);
         person.setFirstName(firstName);
