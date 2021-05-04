@@ -2,8 +2,6 @@ package ru.otus.homework.magic.spring.boot.dao;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import ru.otus.homework.magic.spring.boot.exception.LoadFileException;
-import ru.otus.homework.magic.spring.boot.exception.ParsException;
 import ru.otus.homework.magic.spring.boot.loader.Loader;
 import ru.otus.homework.magic.spring.boot.parser.Parser;
 import ru.otus.homework.magic.spring.boot.parser.DataRow;
@@ -33,7 +31,7 @@ public class PersonTestDAOImpl implements PersonTestDAO{
     }
 
     @Override
-    public PersonTest getPersonTest() throws LoadFileException, ParsException {
+    public PersonTest getPersonTest() {
         List<DataRow> rows = parser.getParsRows(loader.loadFile());
 
         if (rows == null || rows.size() == 0) {

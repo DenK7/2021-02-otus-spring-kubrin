@@ -19,9 +19,10 @@ public class LoaderCSVImpl implements Loader {
     }
 
     @Override
-    public File loadFile() throws LoadFileException {
+    public File loadFile() {
         URL url = getClass().getClassLoader().getResource(file);
         try {
+            assert url != null;
             return Paths.get(url.toURI()).toFile();
         } catch (URISyntaxException e) {
             throw new LoadFileException();
