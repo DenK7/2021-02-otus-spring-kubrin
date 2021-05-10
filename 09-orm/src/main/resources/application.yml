@@ -1,0 +1,29 @@
+spring:
+
+  datasource:
+    url: jdbc:h2:mem:orm-home-work
+    initialization-mode: always
+    data: import.sql
+
+  messages:
+    basename: "i18n/messages"
+
+  jpa:
+    generate-ddl: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+  h2:
+    console:
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+#------------------------------------------
+
+default:
+  parameter:
+    locale: en
+
