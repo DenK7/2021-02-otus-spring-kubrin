@@ -21,7 +21,12 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public List<Book> getAllBooks() {
-        return namedParameterJdbcOperations.query("select * from book", new BookMapper());
+        return namedParameterJdbcOperations.query(
+                "select b.id, b.book_name, b.author_id, a.author_name, b.genre_id, g.genre_name" +
+                        " from book b " +
+                        " left join author a on b.author_id = a.id" +
+                        " left join genre g on b.genre_id = g.id"
+                , new BookMapper());
     }
 
     @Override
@@ -49,7 +54,11 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public Book getBookById(Long id) {
         return namedParameterJdbcOperations.queryForObject(
-                "select * from book where id = :id", Map.of("id", id), new BookMapper());
+                "select b.id, b.book_name, b.author_id, a.author_name, b.genre_id, g.genre_name" +
+                        " from book b " +
+                        " left join author a on b.author_id = a.id" +
+                        " left join genre g on b.genre_id = g.id" +
+                        " where b.id = :id", Map.of("id", id), new BookMapper());
 
     }
 
@@ -59,8 +68,17 @@ public class BookDAOImpl implements BookDAO {
             Long id = resultSet.getLong("id");
             String bookName = resultSet.getString("book_name");
             Long authorId = resultSet.getLong("author_id");
+            String authorName = resultSet.getString("author_name");
             Long genreId = resultSet.getLong("genre_id");
-            return Book.builder().id(id).bookName(bookName).authorId(authorId).genreId(genreId).build();
+            String genreName = resultSet.getString("genre_name");
+            return Book.builder()
+                    .id(id)
+                    .bookName(bookName)
+                    .authorId(authorId)
+                    .authorName(authorName)
+                    .genreId(genreId)
+                    .genreName(genreName)
+                    .build();
         }
     }
 }

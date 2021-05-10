@@ -21,7 +21,7 @@ public class GenreDAOImpl implements GenreDAO {
     @Override
     public Genre getGenreById(Long id) {
         return namedParameterJdbcOperations.queryForObject(
-                "select * from genre where id = :id", Map.of("id", id), new GenreMapper());
+                "select id, genre_name from genre where id = :id", Map.of("id", id), new GenreMapper());
     }
 
     private static class GenreMapper implements RowMapper<Genre> {

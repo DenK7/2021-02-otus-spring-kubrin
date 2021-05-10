@@ -2,9 +2,7 @@ package ru.otus.jdbc.service;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import ru.otus.jdbc.dao.AuthorDAO;
 import ru.otus.jdbc.dao.BookDAO;
-import ru.otus.jdbc.dao.GenreDAO;
 import ru.otus.jdbc.domain.Book;
 import ru.otus.jdbc.exception.InputNotCorrectException;
 
@@ -17,13 +15,9 @@ import java.util.List;
 public class BookServiceImpl implements BookService{
 
     private final BookDAO bookDAO;
-    private final GenreDAO genreDAO;
-    private final AuthorDAO authorDAO;
 
-    public BookServiceImpl(BookDAO bookDAO, GenreDAO genreDAO, AuthorDAO authorDAO) {
+    public BookServiceImpl(BookDAO bookDAO) {
         this.bookDAO = bookDAO;
-        this.genreDAO = genreDAO;
-        this.authorDAO = authorDAO;
     }
 
     @Override
@@ -90,8 +84,8 @@ public class BookServiceImpl implements BookService{
 
     private String mappBookToString(Book book) {
         return "id = " + book.getId() + " name = " + book.getBookName() +
-                " author = " + authorDAO.getAuthorById(book.getAuthorId()).getAuthorName() +
-                " genre = " + genreDAO.getGenreById(book.getGenreId()).getGenreName();
+                " author = " + book.getAuthorName() +
+                " genre = " + book.getGenreName();
     }
 
     //добавить проверку на присутствие в бд

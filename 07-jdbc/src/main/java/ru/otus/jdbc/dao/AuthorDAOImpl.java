@@ -27,13 +27,13 @@ public class AuthorDAOImpl implements AuthorDAO {
 
     @Override
     public List<Author> getAllAuthors() {
-        return namedParameterJdbcOperations.query("select * from author", new AuthorMapper());
+        return namedParameterJdbcOperations.query("select id, author_name from author", new AuthorMapper());
     }
 
     @Override
     public Author getAuthorById(Long id) {
         return namedParameterJdbcOperations.queryForObject(
-                "select * from author where id = :id", Map.of("id", id), new AuthorMapper());
+                "select id, author_name from author where id = :id", Map.of("id", id), new AuthorMapper());
     }
 
     private static class AuthorMapper implements RowMapper<Author> {

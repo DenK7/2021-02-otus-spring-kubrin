@@ -58,7 +58,9 @@ public class BookDAOTest {
                 .id(1L)
                 .bookName("BOOK 1")
                 .authorId(1L)
+                .authorName("AUTHOR 1")
                 .genreId(1L)
+                .genreName("GENRE 1")
                 .build();
         Book book = bookDAO.getBookById(1L);
         assertThat(book).usingRecursiveComparison().isEqualTo(expectedBook);
