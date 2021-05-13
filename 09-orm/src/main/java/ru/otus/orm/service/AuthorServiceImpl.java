@@ -18,7 +18,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public String getAllAuthors() {
-        List<Author> authors = authorRepository.findAll();
+        List<Author> authors = authorRepository.findAllAuthors();
         StringBuilder builder = new StringBuilder();
         for (Author author: authors) {
             if (builder.length() > 0) {
@@ -31,7 +31,9 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public String getAuthorById(Long id) {
-        return Optional.of(authorRepository.findById(id).get().toString())
+        Optional<Author> authorOptional = authorRepository.findAuthorById(id);
+        return authorOptional
+                .map(genre -> toString())
                 .orElse("Author not found");
     }
 }

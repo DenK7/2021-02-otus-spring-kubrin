@@ -1,6 +1,7 @@
 package ru.otus.orm.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "GENRE")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

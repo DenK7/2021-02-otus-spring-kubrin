@@ -16,12 +16,12 @@ public class AuthorRepositoryImpl implements AuthorRepository{
     private EntityManager entityManager;
 
     @Override
-    public Optional<Author> findById(Long id) {
+    public Optional<Author> findAuthorById(Long id) {
         return Optional.ofNullable(entityManager.find(Author.class, id));
     }
 
     @Override
-    public List<Author> findAll() {
+    public List<Author> findAllAuthors() {
         TypedQuery<Author> query = entityManager.createQuery("select s from Author s", Author.class);
         return query.getResultList();
     }

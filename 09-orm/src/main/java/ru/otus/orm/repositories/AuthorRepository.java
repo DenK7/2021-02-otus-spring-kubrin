@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface AuthorRepository {
 
-    Optional<Author> findById(Long id);
-    List<Author> findAll();
+    Optional<Author> findAuthorById(Long id);
+    List<Author> findAllAuthors();
 }

@@ -4,6 +4,8 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import ru.otus.orm.service.AuthorService;
+import ru.otus.orm.service.BookService;
+import ru.otus.orm.service.CommentService;
 import ru.otus.orm.service.GenreService;
 
 @ShellComponent
@@ -11,11 +13,17 @@ public class ShellCommands {
 
     private final AuthorService authorService;
     private final GenreService genreService;
+    private final CommentService commentService;
+    private final BookService bookService;
 
-    public ShellCommands(AuthorService authorService, GenreService genreService) {
+    public ShellCommands(AuthorService authorService, GenreService genreService, CommentService commentService, BookService bookService) {
         this.authorService = authorService;
         this.genreService = genreService;
+        this.commentService = commentService;
+        this.bookService = bookService;
     }
+
+    // ------------------- Author
 
     @ShellMethod(value = "Get all authors", key = {"al", "all-authors"})
     public String getAllAuthors() {
@@ -27,6 +35,8 @@ public class ShellCommands {
         return authorService.getAuthorById(authorId);
     }
 
+    // ------------------- Genre
+
     @ShellMethod(value = "Get all genres", key = {"ag", "all-genres"})
     public String getAllGenres() {
         return genreService.getAllGenre();
@@ -37,35 +47,67 @@ public class ShellCommands {
         return genreService.getGenreById(genreId);
     }
 
-//
-//    @ShellMethod(value = "Add authors", key = {"aa", "add-author"})
-//    public String addAuthor(@ShellOption(defaultValue = "Author") String authorName) {
-//        return authorService.addAuthor(authorName);
-//    }
-//
-//    // метод только для проверки систояния бд
-//    @ShellMethod(value = "Get all books", key = {"ab", "all-books"})
-//    public String getAllBooks() {
-//        return bookService.getAllBooks();
-//    }
-//
-//    @ShellMethod(value = "Get book", key = {"b", "get-book"})
-//    public String getBook(@ShellOption(defaultValue = "0") Long bookId) {
-//        return bookService.getBookById(bookId);
-//    }
-//
-//    @ShellMethod(value = "Delete book", key = {"d", "delete-book"})
-//    public String delBook(@ShellOption(defaultValue = "0") Long bookId) {
-//        return bookService.deleteBookById(bookId);
-//    }
-//
-//    @ShellMethod(value = "Add book", key = {"ib", "insert-book"})
-//    public String addBook(@ShellOption(defaultValue = "Book name") String bookName) {
-//        return bookService.addBook(bookName);
-//    }
-//
-//    @ShellMethod(value = "Update book", key = {"ub", "update-book"})
-//    public String updBook(@ShellOption(defaultValue = "0") Long bookId) {
-//        return bookService.updBook(bookId);
-//    }
+    // ------------------- Comment
+
+    @ShellMethod(value = "Get all comments", key = {"ac", "all-comments"})
+    public String getAllComments() {
+        return commentService.getAllComments();
+    }
+
+    @ShellMethod(value = "Get comment by id", key = {"ci", "get-comment"})
+    public String getCommentById(@ShellOption(defaultValue = "0") Long commentId) {
+        return commentService.getCommentById(commentId);
+    }
+
+    @ShellMethod(value = "Delete comment by id", key = {"cd", "delete-comment"})
+    public String deleteCommentById(@ShellOption(defaultValue = "0") Long commentId) {
+        return commentService.deleteCommentById(commentId);
+    }
+
+    @ShellMethod(value = "Update comment by id", key = {"cu", "update-comment"})
+    public String updateCommentById(@ShellOption(defaultValue = "0") Long commentId) {
+        return commentService.updateCommentById(commentId);
+    }
+
+    @ShellMethod(value = "Add comment", key = {"ca", "add-comment"})
+    public String addComment(@ShellOption(defaultValue = "Comment test") String commentTxt) {
+        return commentService.addComment(commentTxt);
+    }
+
+    // ------------------- Book
+
+    @ShellMethod(value = "Get all books", key = {"ab", "all-books"})
+    public String getAllBooks() {
+        return bookService.getAllBooks();
+    }
+
+    @ShellMethod(value = "Get book by id", key = {"bi", "get-book"})
+    public String getBookById(@ShellOption(defaultValue = "0") Long bookId) {
+        return bookService.getBookById(bookId);
+    }
+
+    @ShellMethod(value = "Delete book by id", key = {"bd", "delete-book"})
+    public String deleteBookById(@ShellOption(defaultValue = "0") Long bookId) {
+        return bookService.deleteBookById(bookId);
+    }
+
+    @ShellMethod(value = "Update book by id", key = {"bu", "update-book"})
+    public String updateBookById(@ShellOption(defaultValue = "0") Long bookId) {
+        return bookService.updateBookById(bookId);
+    }
+
+    @ShellMethod(value = "Add book", key = {"ba", "add-book"})
+    public String addBook(@ShellOption(defaultValue = "book test") String bookName) {
+        return bookService.addBook(bookName);
+    }
+
+    @ShellMethod(value = "Delete author from book by book id", key = {"bad", "delete-author-book"})
+    public String deleteAuthorByBookId(@ShellOption(defaultValue = "0") Long bookId) {
+        return bookService.deleteAuthorByBookId(bookId);
+    }
+
+    @ShellMethod(value = "Add author into book by book id", key = {"baa", "add-author-book"})
+    public String addAuthorByBookId(@ShellOption(defaultValue = "0") Long bookId) {
+        return bookService.addAuthorByBookId(bookId);
+    }
 }

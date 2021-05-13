@@ -16,12 +16,12 @@ public class GenreRepositoryImpl implements GenreRepository{
     private EntityManager entityManager;
 
     @Override
-    public Optional<Genre> findById(Long id) {
+    public Optional<Genre> findGenreById(Long id) {
         return Optional.ofNullable(entityManager.find(Genre.class, id));
     }
 
     @Override
-    public List<Genre> findAll() {
+    public List<Genre> findAllGenres() {
         TypedQuery<Genre> query = entityManager.createQuery("select s from Genre s", Genre.class);
         return query.getResultList();
     }
