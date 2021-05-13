@@ -8,9 +8,6 @@ import ru.otus.orm.exception.InputNotCorrectException;
 import ru.otus.orm.repositories.BookRepository;
 import ru.otus.orm.repositories.CommentRepository;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,6 +85,7 @@ public class CommentServiceImpl implements CommentService{
                 book.getComments().add(savedComment);
                 return mapComment(savedComment);
             } catch (Exception e) {
+                //тут желательно выдавать stack trace
                 return "Comment not add";
             }
         } else {
