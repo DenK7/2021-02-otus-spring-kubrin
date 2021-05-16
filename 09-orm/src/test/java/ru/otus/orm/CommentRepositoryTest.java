@@ -49,7 +49,9 @@ public class CommentRepositoryTest {
     @DisplayName(" удалять коммент")
     @Test
     void shouldCorrectDeleteComment() {
-        commentRepository.deleteCommentById(1L);
+        Optional<Comment> comment = commentRepository.findCommentById(1L);
+        assertThat(comment.isPresent()).isTrue();
+        commentRepository.deleteComment(comment.get());
         List<Comment> comments = commentRepository.findAllComments();
         assertThat(comments.size()).isEqualTo(1);
     }

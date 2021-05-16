@@ -22,6 +22,7 @@ public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "GENRE_NAME")
     private String genreName;
 

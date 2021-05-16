@@ -11,6 +11,6 @@ public interface BookRepository {
     Book saveBook(Book book);
     Optional<Book> findBookById(Long id);
     List<Book> findAllBooks();
-    void deleteBookById(Long id);
+    void deleteBook(Book book);
     BigInteger countBookById(Long id);
 }

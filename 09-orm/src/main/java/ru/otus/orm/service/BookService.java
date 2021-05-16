@@ -6,7 +6,7 @@ public interface BookService {
     String getBookById(Long id);
     String addBook(String txt);
     String updateBookById(Long id);
-    String deleteBookById(Long id);
+    String deleteBook(Long id);
     String addAuthorByBookId(Long id);
     String deleteAuthorByBookId(Long id);
 }

@@ -61,7 +61,7 @@ public class ShellCommands {
 
     @ShellMethod(value = "Delete comment by id", key = {"cd", "delete-comment"})
     public String deleteCommentById(@ShellOption(defaultValue = "0") Long commentId) {
-        return commentService.deleteCommentById(commentId);
+        return commentService.deleteComment(commentId);
     }
 
     @ShellMethod(value = "Update comment by id", key = {"cu", "update-comment"})
@@ -88,7 +88,7 @@ public class ShellCommands {
 
     @ShellMethod(value = "Delete book by id", key = {"bd", "delete-book"})
     public String deleteBookById(@ShellOption(defaultValue = "0") Long bookId) {
-        return bookService.deleteBookById(bookId);
+        return bookService.deleteBook(bookId);
     }
 
     @ShellMethod(value = "Update book by id", key = {"bu", "update-book"})

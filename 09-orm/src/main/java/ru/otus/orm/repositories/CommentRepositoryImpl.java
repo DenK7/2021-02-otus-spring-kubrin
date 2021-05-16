@@ -49,10 +49,8 @@ public class CommentRepositoryImpl implements CommentRepository{
     }
 
     @Override
-    public void deleteCommentById(Long id) {
-        Query query = entityManager.createQuery("delete from Comment s where s.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+    public void deleteComment(Comment comment) {
+        entityManager.remove(comment);
     }
 
     @Override

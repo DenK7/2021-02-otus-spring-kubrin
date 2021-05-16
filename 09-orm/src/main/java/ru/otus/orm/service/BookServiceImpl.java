@@ -56,11 +56,13 @@ public class BookServiceImpl implements BookService{
 
     @Override
     @Transactional
-    public String deleteBookById(Long id) {
-        //двунаправленная связь, нужно удалять в обоих направлениях
-        commentRepository.deleteCommentsByBookId(id);
-        bookRepository.deleteBookById(id);
-        return "Book deleted";
+    public String deleteBook(Long id) {
+        Optional<Book> bookOptional = bookRepository.findBookById(id);
+        if (bookOptional.isPresent()) {
+            bookRepository.deleteBook(bookOptional.get());
+            return "Book deleted";
+        }
+        return "Book not found";
     }
 
     @Override

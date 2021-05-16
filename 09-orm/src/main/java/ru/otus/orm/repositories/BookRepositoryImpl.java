@@ -39,10 +39,9 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public void deleteBookById(Long id) {
-        Query query = entityManager.createQuery("delete from Book where id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+    public void deleteBook(Book book) {
+        System.out.println("------------ del book");
+        entityManager.remove(book);
     }
 
     @Override

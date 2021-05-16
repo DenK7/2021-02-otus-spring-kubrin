@@ -53,8 +53,10 @@ public class BookRepositoryTest {
     @DisplayName(" удалять книгу")
     @Test
     void shouldCorrectDeleteBook() {
-        commentRepository.deleteCommentsByBookId(1L);
-        bookRepository.deleteBookById(1L);
+        Optional<Book> bookOptional = bookRepository.findBookById(1L);
+        assertThat(bookOptional.isPresent()).isTrue();
+        Book book = bookOptional.get();
+        bookRepository.deleteBook(book);
         List<Book> books = bookRepository.findAllBooks();
         assertThat(books.size()).isEqualTo(1);
     }

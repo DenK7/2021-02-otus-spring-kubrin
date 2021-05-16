@@ -41,15 +41,19 @@ public class CommentServiceImpl implements CommentService{
     public String getCommentById(Long id) {
         Optional<Comment> commentOptional = commentRepository.findCommentById(id);
         return commentOptional
-                .map(genre -> mapComment(genre))
-                .orElse("Genre not found");
+                .map(this::mapComment)
+                .orElse("Comment not found");
     }
 
     @Override
     @Transactional
-    public String deleteCommentById(Long id) {
-        commentRepository.deleteCommentById(id);
-        return "Comment deleted";
+    public String deleteComment(Long id) {
+        Optional<Comment> commentOptional = commentRepository.findCommentById(id);
+        if (commentOptional.isPresent()) {
+            commentRepository.deleteComment(commentOptional.get());
+            return "Comment deleted";
+        }
+        return "Comment not found";
     }
 
     @Override
@@ -58,7 +62,7 @@ public class CommentServiceImpl implements CommentService{
         Optional<Comment> commentOptional = commentRepository.findCommentById(id);
         return commentOptional
                 .map(this::changeTxtAndUpdateComment)
-                .orElse("Genre not found");
+                .orElse("Comment not found");
     }
 
     @Override
@@ -69,9 +73,9 @@ public class CommentServiceImpl implements CommentService{
         }
 
         String val = getValue("Input book id");
-        Long bookId;
+        long bookId;
         try {
-            bookId = Long.valueOf(val);
+            bookId = Long.parseLong(val);
         } catch (Exception e) {
             return "Book id is not correct";
         }
