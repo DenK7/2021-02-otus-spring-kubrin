@@ -6,4 +6,6 @@ public interface CommentService {
     String addComment(String txt);
     String updateCommentById(Long id);
     String deleteComment(Long id);
+
+    String getCommentByBookId(Long bookId);
 }

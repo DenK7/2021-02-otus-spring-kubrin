@@ -97,6 +97,24 @@ public class CommentServiceImpl implements CommentService{
         }
     }
 
+    @Override
+    @Transactional
+    public String getCommentByBookId(Long bookId) {
+        Optional<Book> bookOptional = bookRepository.findBookById(bookId);
+        if (bookOptional.isEmpty()) {
+            return "Book not found";
+        }
+
+        StringBuilder builder = new StringBuilder();
+        for (Comment comment: bookOptional.get().getComments()) {
+            if (builder.length() > 0) {
+                builder.append("; ");
+            }
+            builder.append(mapComment(comment));
+        }
+        return builder.toString();
+    }
+
     private String changeTxtAndUpdateComment(Comment comment) {
         try {
             String txt = getValue("Input comment:");

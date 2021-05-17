@@ -74,6 +74,12 @@ public class ShellCommands {
         return commentService.addComment(commentTxt);
     }
 
+    @ShellMethod(value = "Get comment by book id", key = {"cb", "comment-book"})
+    public String getCommentByBookId(@ShellOption(defaultValue = "0") Long bookId) {
+        return commentService.getCommentByBookId(bookId);
+    }
+
+
     // ------------------- Book
 
     @ShellMethod(value = "Get all books", key = {"ab", "all-books"})
