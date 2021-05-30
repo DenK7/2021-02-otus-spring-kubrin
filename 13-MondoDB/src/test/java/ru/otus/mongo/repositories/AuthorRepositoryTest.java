@@ -1,4 +1,4 @@
-package ru.otus.mongo;
+package ru.otus.mongo.repositories;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
 @EnableConfigurationProperties
-@DisplayName("Репозиторий на Mongo для работы с Author ")
+@DisplayName("Репозиторий на Mongo для работы с Author должен ")
 public class AuthorRepositoryTest {
 
     @Autowired
@@ -35,5 +35,14 @@ public class AuthorRepositoryTest {
         assertThat(authors.size()).isEqualTo(3);
         Optional<Author> authorOptional = authorRepository.findById(authors.get(0).getId());
         assertThat(authorOptional.get()).usingRecursiveComparison().isEqualTo(authors.get(0));
+    }
+
+    @DisplayName(" возвращать автора по наименованию")
+    @Test
+    void shouldCorrectReturnAuthorByName() {
+        List<Author> authors = authorRepository.findAll();
+        assertThat(authors.size()).isEqualTo(3);
+        Author author = authorRepository.findAuthorByAuthorName(authors.get(0).getAuthorName());
+        assertThat(author).usingRecursiveComparison().isEqualTo(authors.get(0));
     }
 }

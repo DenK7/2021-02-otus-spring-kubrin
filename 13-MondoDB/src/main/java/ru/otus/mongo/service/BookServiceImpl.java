@@ -85,7 +85,7 @@ public class BookServiceImpl implements BookService {
     public String updateBookById(String id) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         return bookOptional
-                .map(this::changeNameGenreAndUpdateComment)
+                .map(this::changeNameAndGenre)
                 .orElse("Book not found");
     }
 
@@ -94,7 +94,7 @@ public class BookServiceImpl implements BookService {
     public String addAuthorByBookId(String id) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         return bookOptional
-                .map(this::addAuthorAndUpdateComment)
+                .map(this::addAuthor)
                 .orElse("Book not found");
     }
 
@@ -125,7 +125,7 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-    private String addAuthorAndUpdateComment(Book book) {
+    private String addAuthor(Book book) {
         String authorId = getValue("Input author id");
 
         Optional<Author> authorOptional = authorRepository.findById(authorId);
@@ -164,7 +164,7 @@ public class BookServiceImpl implements BookService {
         return builder.toString();
     }
 
-    private String changeNameGenreAndUpdateComment(Book book) {
+    private String changeNameAndGenre(Book book) {
         String bookName = getValue("Input book name:");
         book.setBookName(bookName);
 
