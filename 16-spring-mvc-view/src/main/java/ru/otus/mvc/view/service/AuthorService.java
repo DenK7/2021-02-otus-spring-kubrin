@@ -1,8 +1,10 @@
 package ru.otus.mvc.view.service;
 
+import ru.otus.mvc.view.domain.Author;
+
+import java.util.List;
+
 public interface AuthorService {
 
-    String getAllAuthors();
-    String getAuthorById(String id);
-    String getAuthorByName(String authorName);
+    List<Author> getAllAuthors();
 }

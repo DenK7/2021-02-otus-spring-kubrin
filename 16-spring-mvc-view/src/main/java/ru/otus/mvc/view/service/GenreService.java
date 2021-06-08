@@ -1,7 +1,9 @@
 package ru.otus.mvc.view.service;
 
+import ru.otus.mvc.view.domain.Genre;
+
+import java.util.List;
+
 public interface GenreService {
-    String getAllGenre();
-    String getGenreById(String id);
-    String getGenreByName(String genreName);
+    List<Genre> getAllGenre();
 }

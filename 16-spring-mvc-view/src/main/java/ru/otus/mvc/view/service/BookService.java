@@ -1,13 +1,14 @@
 package ru.otus.mvc.view.service;
 
+import ru.otus.mvc.view.domain.Book;
+
+import java.util.List;
+
 public interface BookService {
 
-    String getAllBooks();
-    String getBookById(String id);
-    String getBookByName(String bookName);
-    String addBook(String txt);
-    String updateBookById(String id);
-    String deleteBook(String id);
-    String addAuthorByBookId(String id);
-    String deleteAuthorByBookId(String id);
+    List<Book> getAllBooks();
+    Book getBookById(String id);
+    Book addBook(Book book);
+    Book updateBook(Book book);
+    void deleteBook(String id);
 }

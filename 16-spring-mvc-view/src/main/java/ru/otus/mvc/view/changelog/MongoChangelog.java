@@ -53,11 +53,11 @@ public class MongoChangelog {
     public void insertBook1(BookRepository repository) {
         List<Author> authors = new ArrayList<>();
         authors.add(author1);
-        book1 = repository.save(Book.builder()
-                .bookName("book1")
-                .authors(authors)
-                .genre(genre1)
-                .build());
+        Book book = new Book();
+        book.setBookName("book1");
+        book.setAuthors(authors);
+        book.setGenre(genre1);
+        book1 = repository.save(book);
     }
 
     @ChangeSet(order = "005", id = "insertBook2", author = "kdv")
@@ -65,11 +65,11 @@ public class MongoChangelog {
         List<Author> authors = new ArrayList<>();
         authors.add(author2);
         authors.add(author3);
-        book2 = repository.save(Book.builder()
-                .bookName("book2")
-                .authors(authors)
-                .genre(genre2)
-                .build());
+        Book book = new Book();
+        book.setBookName("book2");
+        book.setAuthors(authors);
+        book.setGenre(genre2);
+        book2 = repository.save(book);
     }
 
     @ChangeSet(order = "006", id = "insertComments", author = "kdv")

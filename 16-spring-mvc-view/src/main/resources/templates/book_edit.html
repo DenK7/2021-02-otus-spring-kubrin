@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Edit book</title>
+  <style type="text/css">
+    body {
+      padding: 50px;
+    }
+
+    label {
+      display: inline-block;
+      width: 100px;
+    }
+
+    input:read-only {
+      background: lightgray;
+    }
+
+    .row {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<form id="edit-form" th:action="@{/book_edit(id=${book.id})}" th:method="post" action="book_edit.html">
+  <h1>Book Info:</h1>
+
+  <div class="row">
+    <label for="id-input">ID:</label>
+    <input id="id-input" type="text" readonly="readonly" th:value="${book.id}" value="#"/>
+  </div>
+
+  <div class="row">
+    <label for="name-input">Book Name:</label>
+    <input id="name-input" name="bookName" type="text" th:value="${book.bookName}" value="Book name"/>
+  </div>
+
+  <div class="row">
+    <label for="genre-input">Genre:</label>
+    <select class="form-control" th:field="${book.genre}"  id="genre-input" name="genre">
+      <option th:each="g : ${genres}" th:value="${g.id}" th:text="${g.genreName}"></option>
+    </select>
+  </div>
+
+  <div class="row">
+    <label for="author-input">Genre:</label>
+    <input type="checkbox" name="authors" id="author-input"
+           th:each="author : ${authors}" th:text="${author.authorName}" th:value="${author.id}" th:field="${book.authors}"/>
+  </div>
+
+  <div class="row">
+    <button type="submit">Save</button>
+  </div>
+</form>
+
+</body>
+</html>
