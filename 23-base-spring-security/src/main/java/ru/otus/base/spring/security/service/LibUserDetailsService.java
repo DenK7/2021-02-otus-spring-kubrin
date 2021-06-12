@@ -28,14 +28,9 @@ public class LibUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("No user found with username: " + userName);
         }
 
-        boolean enabled = true;
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-        boolean accountNonLocked = true;
-
         return new org.springframework.security.core.userdetails.User(
-                user.getUserName(), "{noop}"+user.getPassword().toLowerCase(), enabled, accountNonExpired,
-                credentialsNonExpired, accountNonLocked, getAuthorities(user.getRole()));
+                user.getUserName(), "{noop}"+user.getPassword().toLowerCase(), true, true,
+                true, true, getAuthorities(user.getRole()));
     }
 
     //для примера только 1 роль, а не список
