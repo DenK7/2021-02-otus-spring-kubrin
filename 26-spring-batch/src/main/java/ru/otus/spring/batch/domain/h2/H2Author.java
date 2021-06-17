@@ -1,6 +1,7 @@
 package ru.otus.spring.batch.domain.h2;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
@@ -13,6 +14,7 @@ import java.util.List;
 @Table(name = "AUTHOR")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class H2Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +22,9 @@ public class H2Author {
 
     @Column(name = "AUTHOR_NAME")
     private String authorName;
+
+    @Column(name = "MONGO_ID")
+    private String mongoId;
 
     @ManyToMany(mappedBy = "h2Authors", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @BatchSize(size = 5)

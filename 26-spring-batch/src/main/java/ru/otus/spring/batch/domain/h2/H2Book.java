@@ -23,6 +23,9 @@ public class H2Book {
     @Column(name = "BOOK_NAME")
     private String bookName;
 
+    @Column(name = "MONGO_ID")
+    private String mongoId;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @BatchSize(size = 5)
     private List<H2Author> h2Authors;

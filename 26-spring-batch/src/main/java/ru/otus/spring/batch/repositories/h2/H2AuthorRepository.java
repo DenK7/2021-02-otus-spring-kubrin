@@ -7,4 +7,5 @@ import ru.otus.spring.batch.domain.h2.H2Author;
 @Repository
 public interface H2AuthorRepository extends JpaRepository<H2Author, Long> {
 
+    H2Author findByMongoId(String mongoId);
 }

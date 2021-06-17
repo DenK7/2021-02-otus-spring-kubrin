@@ -23,6 +23,9 @@ public class H2Genre {
     @Column(name = "GENRE_NAME")
     private String genreName;
 
+    @Column(name = "MONGO_ID")
+    private String mongoId;
+
     @OneToMany(mappedBy = "h2Genre", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @BatchSize(size = 5)
     private List<H2Book> h2Books;
