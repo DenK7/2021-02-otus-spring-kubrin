@@ -14,12 +14,12 @@ import org.springframework.batch.item.data.MongoItemReader;
 import org.springframework.batch.item.data.builder.MongoItemReaderBuilder;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
+import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.lang.NonNull;
 import ru.otus.spring.batch.domain.h2.H2Author;
 import ru.otus.spring.batch.domain.h2.H2Book;
@@ -31,6 +31,7 @@ import ru.otus.spring.batch.service.AuthorServiceImpl;
 import ru.otus.spring.batch.service.BookService;
 import ru.otus.spring.batch.service.GenreServiceImpl;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
@@ -45,6 +46,9 @@ public class JobConfig {
 
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
+
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
 
     @Bean
     public Job importBookJob (Step transformGenre, Step transformAuthor
@@ -114,19 +118,28 @@ public class JobConfig {
 
     @StepScope
     @Bean
-    public JdbcBatchItemWriter<H2Book> writerBook(DataSource dataSource) {
-        return new JdbcBatchItemWriterBuilder<H2Book>()
-                .itemSqlParameterSourceProvider(item -> {
-                    final MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource();
-                    sqlParameterSource.addValue("bookName", item.getBookName());
-                    sqlParameterSource.addValue("mongoId", item.getMongoId());
-                    sqlParameterSource.addValue("genreId", item.getH2Genre().getId());
-                    return sqlParameterSource;
-                })
-                .sql("insert into book (book_name, mongo_id, genre_id) values (:bookName, :mongoId, :genreId)")
-                .dataSource(dataSource)
-                .build();
+    public JpaItemWriter<H2Book> writerBook() {
+        JpaItemWriter<H2Book> bookItemWriter = new JpaItemWriter<>();
+        bookItemWriter.setEntityManagerFactory(entityManagerFactory);
+        return bookItemWriter;
     }
+
+// не понял как через JdbcBatchItemWriter сделать загрузку многие ко многим
+//    @StepScope
+//    @Bean
+//    public JdbcBatchItemWriter<H2Book> writerBook(DataSource dataSource) {
+//        return new JdbcBatchItemWriterBuilder<H2Book>()
+//                .itemSqlParameterSourceProvider(item -> {
+//                    final MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource();
+//                    sqlParameterSource.addValue("bookName", item.getBookName());
+//                    sqlParameterSource.addValue("mongoId", item.getMongoId());
+//                    sqlParameterSource.addValue("genreId", item.getH2Genre().getId());
+//                    return sqlParameterSource;
+//                })
+//                .sql("insert into book (book_name, mongo_id, genre_id) values (:bookName, :mongoId, :genreId)")
+//                .dataSource(dataSource)
+//                .build();
+//    }
 
     //--------------------------------------- genre ----------------------------------
     @Bean

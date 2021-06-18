@@ -6,4 +6,6 @@ import ru.otus.spring.batch.domain.mongo.MongoAuthor;
 public interface AuthorService {
 
     H2Author mapAuthor (MongoAuthor mongoAuthor);
+    String getAllAuthors();
+
 }

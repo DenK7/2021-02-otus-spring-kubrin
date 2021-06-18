@@ -6,4 +6,6 @@ import ru.otus.spring.batch.domain.mongo.MongoGenre;
 public interface GenreService {
 
     H2Genre mapGenre(MongoGenre mongoGenre);
+    String getAllGenre();
+
 }

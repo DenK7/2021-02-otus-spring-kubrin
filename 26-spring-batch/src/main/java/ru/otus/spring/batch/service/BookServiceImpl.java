@@ -5,11 +5,13 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.batch.domain.h2.H2Author;
 import ru.otus.spring.batch.domain.h2.H2Book;
 import ru.otus.spring.batch.domain.h2.H2Genre;
+import ru.otus.spring.batch.domain.mongo.MongoAuthor;
 import ru.otus.spring.batch.domain.mongo.MongoBook;
 import ru.otus.spring.batch.repositories.h2.H2AuthorRepository;
 import ru.otus.spring.batch.repositories.h2.H2BookRepository;
 import ru.otus.spring.batch.repositories.h2.H2GenreRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,11 +34,17 @@ public class BookServiceImpl implements BookService {
     public H2Book mapBook(MongoBook mongoBook) {
         H2Book book = H2Book.builder()
                 .bookName(mongoBook.getBookName())
+                .h2Authors(new ArrayList<>())
                 .build();
 
         if (mongoBook.getMongoGenre() != null) {
             Optional<H2Genre> genre = genreRepository.findByMongoId(mongoBook.getMongoGenre().getId());
             genre.ifPresent(book::setH2Genre);
+        }
+
+        for (MongoAuthor mongoAuthor: mongoBook.getMongoAuthors()) {
+            Optional<H2Author> author = authorRepository.findByMongoId(mongoAuthor.getId());
+            author.ifPresent(book.getH2Authors()::add);
         }
 
         return book;
