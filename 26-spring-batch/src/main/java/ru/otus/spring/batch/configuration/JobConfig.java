@@ -84,15 +84,15 @@ public class JobConfig {
                 .writer(writer)
                 .listener(new ItemReadListener<>() {
                     public void beforeRead() {
-                        logger.info("Начало чтения");
+                        logger.info("Начало чтения книг");
                     }
 
                     public void afterRead(@NonNull MongoBook o) {
-                        logger.info("Конец чтения");
+                        logger.info("Конец чтения книг");
                     }
 
                     public void onReadError(@NonNull Exception e) {
-                        logger.info("Ошибка чтения");
+                        logger.info("Ошибка чтения книг");
                     }
                 })
                 .build();
