@@ -19,7 +19,7 @@ public class BookController {
     }
 
     @ApiOperation(value = "Получение списка книг", response = BookDto.class)
-    @GetMapping("/lib/books")
+    @GetMapping("/books")
     public ResponseEntity<List<BookDto>> listBooks() {
         return ResponseEntity.ok(bookService.getAllBooks());
     }

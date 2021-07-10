@@ -19,7 +19,7 @@ public class GenreController {
     }
 
     @ApiOperation(value = "Получение списка жанров", response = GenreDto.class)
-    @GetMapping("/lib/genres")
+    @GetMapping("/genres")
     public ResponseEntity<List<GenreDto>> listBooks() {
         return ResponseEntity.ok(genreService.getAllGenre());
     }

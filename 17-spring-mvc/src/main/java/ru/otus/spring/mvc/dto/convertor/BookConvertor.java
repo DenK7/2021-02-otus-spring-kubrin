@@ -1,8 +1,6 @@
 package ru.otus.spring.mvc.dto.convertor;
 
-import ru.otus.spring.mvc.domain.Author;
 import ru.otus.spring.mvc.domain.Book;
-import ru.otus.spring.mvc.dto.AuthorDto;
 import ru.otus.spring.mvc.dto.BookDto;
 
 import java.util.ArrayList;

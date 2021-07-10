@@ -19,7 +19,7 @@ public class AuthorController {
     }
 
     @ApiOperation(value = "Получение списка авторов", response = AuthorDto.class)
-    @GetMapping("/lib/authors")
+    @GetMapping("/authors")
     public ResponseEntity<List<AuthorDto>> listBooks() {
         return ResponseEntity.ok(authorService.getAllAuthors());
     }

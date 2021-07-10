@@ -3,14 +3,8 @@ package ru.otus.spring.mvc.changelog;
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.mongodb.client.MongoDatabase;
-import ru.otus.spring.mvc.domain.Author;
-import ru.otus.spring.mvc.domain.Book;
-import ru.otus.spring.mvc.domain.Comment;
-import ru.otus.spring.mvc.domain.Genre;
-import ru.otus.spring.mvc.repositories.AuthorRepository;
-import ru.otus.spring.mvc.repositories.BookRepository;
-import ru.otus.spring.mvc.repositories.CommentRepository;
-import ru.otus.spring.mvc.repositories.GenreRepository;
+import ru.otus.spring.mvc.domain.*;
+import ru.otus.spring.mvc.repositories.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,17 +28,19 @@ public class MongoChangelog {
 
     @ChangeSet(order = "002", id = "insertAuthors", author = "kdv")
     public void insertAuthors(AuthorRepository repository) {
-        author1 = repository.save(Author.builder().authorName("author1").build());
-        author2 = repository.save(Author.builder().authorName("author2").build());
-        author3 = repository.save(Author.builder().authorName("author3").build());
+        author1 = repository.save(Author.builder().id("1").authorName("author1").build());
+        author2 = repository.save(Author.builder().id("2").authorName("author2").build());
+        author3 = repository.save(Author.builder().id("3").authorName("author3").build());
     }
 
     @ChangeSet(order = "003", id = "insertGenres", author = "kdv")
     public void insertGenres(GenreRepository repository) {
         genre1 = repository.save(Genre.builder()
+                .id("1")
                 .genreName("genre1")
                 .build());
         genre2 = repository.save(Genre.builder()
+                .id("2")
                 .genreName("genre2")
                 .build());
     }
@@ -54,6 +50,7 @@ public class MongoChangelog {
         List<Author> authors = new ArrayList<>();
         authors.add(author1);
         Book book = new Book();
+        book.setId("1");
         book.setBookName("book1");
         book.setAuthors(authors);
         book.setGenre(genre1);
@@ -66,6 +63,7 @@ public class MongoChangelog {
         authors.add(author2);
         authors.add(author3);
         Book book = new Book();
+        book.setId("2");
         book.setBookName("book2");
         book.setAuthors(authors);
         book.setGenre(genre2);
@@ -92,4 +90,9 @@ public class MongoChangelog {
                 .build());
     }
 
+    @ChangeSet(order = "007", id = "insertUsers", author = "kdv")
+    public void insertUsers(UserRepository repository) {
+        repository.save(User.builder().userName("user").password("1").role("USER").build());
+        repository.save(User.builder().userName("admin").password("1").role("ADMIN").build());
+    }
 }
