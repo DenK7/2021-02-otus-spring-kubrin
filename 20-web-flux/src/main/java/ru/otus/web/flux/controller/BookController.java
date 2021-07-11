@@ -5,7 +5,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.otus.web.flux.dto.BookDto;
 import ru.otus.web.flux.dto.convertor.BookConvertor;
-import ru.otus.web.flux.repositories.BookRepository;
+import ru.otus.web.flux.repository.BookRepository;
 
 @RestController
 public class BookController {

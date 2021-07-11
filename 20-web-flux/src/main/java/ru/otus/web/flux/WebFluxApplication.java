@@ -9,7 +9,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 @SpringBootApplication
 @EnableWebFlux
 @EnableMongock
-@EnableReactiveMongoRepositories(basePackages = "ru.otus.web.flux.repositories")
+@EnableReactiveMongoRepositories(basePackages = "ru.otus.web.flux.repository")
 public class WebFluxApplication {
 
 	public static void main(String[] args) {

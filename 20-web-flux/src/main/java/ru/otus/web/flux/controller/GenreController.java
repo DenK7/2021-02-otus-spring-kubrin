@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import ru.otus.web.flux.dto.GenreDto;
 import ru.otus.web.flux.dto.convertor.GenreConvertor;
-import ru.otus.web.flux.repositories.GenreRepository;
+import ru.otus.web.flux.repository.GenreRepository;
 
 @RestController
 public class GenreController {

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import ru.otus.web.flux.dto.AuthorDto;
 import ru.otus.web.flux.dto.convertor.AuthorConvertor;
-import ru.otus.web.flux.repositories.AuthorRepository;
+import ru.otus.web.flux.repository.AuthorRepository;
 
 @RestController
 public class AuthorController {

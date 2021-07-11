@@ -1,4 +1,4 @@
-package ru.otus.web.flux.repositories;
+package ru.otus.web.flux.repository;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.data.repository.query.Param;

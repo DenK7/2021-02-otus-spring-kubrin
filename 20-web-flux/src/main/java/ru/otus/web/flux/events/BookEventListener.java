@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventLis
 import org.springframework.data.mongodb.core.mapping.event.BeforeDeleteEvent;
 import org.springframework.stereotype.Component;
 import ru.otus.web.flux.domain.Book;
-import ru.otus.web.flux.repositories.CommentRepository;
+import ru.otus.web.flux.repository.CommentRepository;
 
 @Component
 public class BookEventListener extends AbstractMongoEventListener<Book> {
