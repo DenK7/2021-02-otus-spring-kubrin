@@ -14,21 +14,26 @@ public abstract class BookConvertor {
 
     public static Book toBook(BookDto dto) {
         Book book = new Book();
-        book.setId(dto.getId());
+        book.setId(dto.getId() != null ? String.valueOf(dto.getId()) : null);
         book.setBookName(dto.getBookName());
         book.setGenre(GenreConvertor.toGenre(dto.getGenre()));
-        book.setAuthors(dto.getAuthors().stream().map(AuthorConvertor::toAuthor)
-                .collect(Collectors.toList()));
+        if (dto.getAuthors() != null) {
+            book.setAuthors(dto.getAuthors().stream().map(AuthorConvertor::toAuthor)
+                    .collect(Collectors.toList()));
+        }
         return book;
     }
 
     public static BookDto toBookDto(Book book) {
-        return BookDto.builder()
-                .id(book.getId())
+         BookDto dto = BookDto.builder()
+                .id(Long.valueOf(book.getId()))
                 .bookName(book.getBookName())
                 .genre(GenreConvertor.toGenreDto(book.getGenre()))
-                .authors(book.getAuthors().stream().map(AuthorConvertor::toAuthorDto).collect(Collectors.toList()))
                 .build();
+         if (book.getAuthors() != null) {
+             dto.setAuthors(book.getAuthors().stream().map(AuthorConvertor::toAuthorDto).collect(Collectors.toList()));
+         }
+         return dto;
     }
 
     public static List<BookDto> toListBookDto(List<Book> books) {

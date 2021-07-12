@@ -15,7 +15,7 @@ import java.util.List;
 public class BookDto {
 
     @ApiModelProperty(value = "уникальный идентификатор")
-    private String id;
+    private Long id;
 
     @ApiModelProperty(value = "Наименование книги")
     private String bookName;

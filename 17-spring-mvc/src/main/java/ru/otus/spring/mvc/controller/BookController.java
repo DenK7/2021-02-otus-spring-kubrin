@@ -36,7 +36,7 @@ public class BookController {
     @ApiOperation(value = "Получение книги", response = BookDto.class)
     public ResponseEntity<BookDto> getBook(
             @ApiParam(value = "id книги", example = "0")
-            @RequestBody String id) {
+            @RequestParam String id) {
         return ResponseEntity.ok(bookService.getBookById(id));
     }
 
@@ -44,7 +44,7 @@ public class BookController {
     @ApiOperation(value = "Удаление книги")
     public ResponseEntity<String> deleteBook(
             @ApiParam(value = "id книги", example = "0")
-            @RequestBody String id) {
+            @RequestParam String id) {
         bookService.deleteBook(id);
         return ResponseEntity.ok(id);
     }

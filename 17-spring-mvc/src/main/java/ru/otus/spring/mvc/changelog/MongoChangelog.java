@@ -92,7 +92,7 @@ public class MongoChangelog {
 
     @ChangeSet(order = "007", id = "insertUsers", author = "kdv")
     public void insertUsers(UserRepository repository) {
-        repository.save(User.builder().userName("user").password("1").role("USER").build());
-        repository.save(User.builder().userName("admin").password("1").role("ADMIN").build());
+        repository.save(User.builder().userName("user").password("1").role("ROLE_USER").build());
+        repository.save(User.builder().userName("admin").password("1").role("ROLE_ADMIN").build());
     }
 }
