@@ -29,7 +29,11 @@ public class MessageServiceImpl implements MessageService {
             peopleModelList.add(peopleDto.getModelFromEntity(people, message));
         }
 
-        System.out.println("start send message ------> " + message+ "; ------ cnt >" + peopleModelList.size());
-        peopleGateway.process(peopleModelList);
+        if (peopleModelList.size() > 0) {
+            System.out.println("start send message ------> " + message + "; ------ cnt >" + peopleModelList.size());
+            peopleGateway.process(peopleModelList);
+        } else {
+            System.out.println("Database not ready to work, row count = 0");
+        }
     }
 }

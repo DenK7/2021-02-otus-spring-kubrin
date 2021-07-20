@@ -21,3 +21,17 @@ spring:
       settings:
         web-allow-others: true
 
+#вызвать http://localhost:8080/actuator для получения метрик
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    logfile:
+      enabled: true
+  health:
+    defaults:
+      enabled: true
