@@ -35,3 +35,11 @@ management:
   health:
     defaults:
       enabled: true
+
+logging:
+  level:
+    root: warn
+    ru.otus: error
+  file:
+    name: integration.log
+
