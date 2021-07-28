@@ -1,0 +1,45 @@
+spring:
+
+  datasource:
+    url: jdbc:h2:mem:jpa-home-work
+    initialization-mode: always
+#    data: import.sql
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+#    defer-datasource-initialization: true
+
+  h2:
+    console:
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+#вызвать http://localhost:8080/actuator для получения метрик
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    logfile:
+      enabled: true
+  health:
+    defaults:
+      enabled: true
+
+logging:
+  level:
+    root: warn
+    ru.otus: error
+  file:
+    name: integration.log
+
