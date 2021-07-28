@@ -19,11 +19,10 @@ public class MessageController {
 
     @ApiOperation(value = "Отправка сообщений всем людям в бд")
     @PostMapping("/sendMessage")
-    public ResponseEntity<?> listBooks(
+    public ResponseEntity<String> listBooks(
             @ApiParam("Сообщение для рассылки, желательно чтоб содержало [name], которое будет заменяться на имя человека")
             @RequestBody String message) {
-        messageService.sendMessages(message);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(messageService.sendMessages(message));
     }
 
 }
