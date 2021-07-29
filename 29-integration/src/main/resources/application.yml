@@ -47,24 +47,19 @@ resilience4j.circuitbreaker:
   configs:
     default:
       registerHealthIndicator: true
-      slidingWindowSize: 10
-      minimumNumberOfCalls: 5
+      slidingWindowSize: 10 # количество вызовов, которые следует учитывать при включении автоматического выключателя
+      minimumNumberOfCalls: 3 # минимальное необходимое количество вызовов, перед которым автоматический выключатель может рассчитать частоту ошибок
       permittedNumberOfCallsInHalfOpenState: 3
       automaticTransitionFromOpenToHalfOpenEnabled: true
-      waitDurationInOpenState: 5s
-      failureRateThreshold: 50
+      waitDurationInOpenState: 5s # Продолжительность, в течение которой автоматический выключатель должен оставаться в разомкнутом состоянии перед переходом в полуоткрытое состояние
+      failureRateThreshold: 50 # настраивает порог частоты отказов в процентах. Если x процентов вызовов не работают, выключатель отключается
       eventConsumerBufferSize: 10
+      slowCallRateThreshold: 65 # настраивает порог низкой скорости вызова в процентах. Если x процентов вызовов являются медленными, автоматический выключатель отключается
+      slowCallDurationThreshold: 2s # настраивает порог продолжительности времени, при котором вызовы считаются медленными
       recordExceptions:
         - java.util.concurrent.TimeoutException
+      #ignoreException — настроить исключение, которое автоматический выключатель может игнорировать и не будет учитываться при успешном или неудачном вызове удаленного сервиса.
   instances:
     integration:
       baseConfig: default
 
-resilience4j.timelimiter:
-  configs:
-    default:
-      cancelRunningFuture: false
-      timeoutDuration: 2s
-  instances:
-    integration:
-      baseConfig: default

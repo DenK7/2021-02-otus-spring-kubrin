@@ -1,8 +1,10 @@
 package ru.otus.integration.service.impl;
 
+import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 import ru.otus.integration.dto.PeopleDto;
 import ru.otus.integration.entity.People;
 import ru.otus.integration.gateway.PeopleGateway;
@@ -14,6 +16,7 @@ import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeoutException;
 
 @RequiredArgsConstructor
@@ -27,9 +30,13 @@ public class MessageServiceImpl implements MessageService {
     private final PeopleGateway peopleGateway;
 
     @Override
-    @TimeLimiter(name = RESILIENCE_INSTANCE)
     @CircuitBreaker(name = RESILIENCE_INSTANCE, fallbackMethod = "sendMessagesFallback")
     public String sendMessages(String message) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+        }
+
         Collection<PeopleModel> peopleModelList = new ArrayList<>();
         List<People> peopleList = peopleRepositories.findAll();
         for (People people : peopleList) {
@@ -45,7 +52,12 @@ public class MessageServiceImpl implements MessageService {
         return "Messages send";
     }
 
-    public String sendMessagesFallback(TimeoutException ex) {
-        return "Messages not send: " + ex.getMessage();
+    private String sendMessagesFallback(CallNotPermittedException ex) {
+        return "Messages not send (CallNotPermittedException): " + ex.getMessage();
     }
+
+    private String sendMessagesFallback(Exception ex) {
+        return "Messages not send (Exception): " + ex.getMessage();
+    }
+
 }
