@@ -4,20 +4,16 @@ import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpServerErrorException;
 import ru.otus.integration.dto.PeopleDto;
 import ru.otus.integration.entity.People;
 import ru.otus.integration.gateway.PeopleGateway;
 import ru.otus.integration.model.PeopleModel;
 import ru.otus.integration.repositories.PeopleRepositories;
 import ru.otus.integration.service.api.MessageService;
-import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeoutException;
 
 @RequiredArgsConstructor
 @Service
